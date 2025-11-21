@@ -14,67 +14,109 @@ chrome.runtime.onInstalled.addListener(() => {
   console.log('Gemini WhatsApp Enhancer installed successfully');
 });
 
+// Listen for keyboard command
+chrome.commands.onCommand.addListener(async (command) => {
+  if (command === 'fix-grammar') {
+    console.log('=== KEYBOARD SHORTCUT TRIGGERED ===');
+    
+    // Get the active tab
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    
+    if (!tab || !tab.url?.includes('web.whatsapp.com')) {
+      console.log('Not on WhatsApp Web, ignoring command');
+      return;
+    }
+    
+    console.log('On WhatsApp, requesting selected text from tab:', tab.id);
+    
+    // Request the selected text from the content script
+    try {
+      const response = await chrome.tabs.sendMessage(tab.id, {
+        action: 'GET_SELECTION'
+      });
+      
+      if (response && response.selectedText) {
+        console.log('Received selected text:', response.selectedText);
+        await processTextCorrection(response.selectedText, tab.id);
+      } else {
+        console.log('No text selected');
+        chrome.tabs.sendMessage(tab.id, {
+          action: 'SHOW_ERROR',
+          error: 'Please select text first (Ctrl+A or drag to select)'
+        });
+      }
+    } catch (error) {
+      console.error('Error getting selection:', error);
+    }
+  }
+});
+
 // Handle context menu clicks
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   if (info.menuItemId === CONTEXT_MENU_ID && info.selectionText) {
     const selectedText = info.selectionText;
-    
-    console.log('=== GEMINI ENHANCER TRIGGERED ===');
+    console.log('=== CONTEXT MENU TRIGGERED ===');
     console.log('Selected text:', selectedText);
-    console.log('Tab ID:', tab.id);
-    
-    try {
-      // Get API key from storage
-      const { geminiApiKey } = await chrome.storage.local.get('geminiApiKey');
-      
-      if (!geminiApiKey) {
-        console.error('No API key found');
-        alert('Please configure your Gemini API key in the extension options.');
-        chrome.runtime.openOptionsPage();
-        return;
-      }
-      
-      console.log('API key found, length:', geminiApiKey.length);
-      
-      // Show loading indicator
-      try {
-        await chrome.tabs.sendMessage(tab.id, { 
-          action: 'SHOW_LOADING' 
-        });
-        console.log('Loading indicator sent');
-      } catch (msgError) {
-        console.warn('Could not send loading message:', msgError);
-      }
-      
-      // Call Gemini API
-      console.log('Calling Gemini API...');
-      const correctedText = await callGeminiAPI(selectedText, geminiApiKey);
-      console.log('API call successful, corrected text:', correctedText);
-      
-      // Send corrected text to content script
-      const response = await chrome.tabs.sendMessage(tab.id, {
-        action: 'REPLACE_SELECTION',
-        replacementText: correctedText
-      });
-      console.log('Replacement message sent, response:', response);
-      
-    } catch (error) {
-      console.error('Error processing text:', error);
-      console.error('Error stack:', error.stack);
-      
-      // Send error message to content script
-      try {
-        await chrome.tabs.sendMessage(tab.id, {
-          action: 'SHOW_ERROR',
-          error: error.message
-        });
-      } catch (msgError) {
-        console.error('Could not send error message:', msgError);
-        alert('Error: ' + error.message);
-      }
-    }
+    await processTextCorrection(selectedText, tab.id);
   }
 });
+
+// Process text correction (shared function for both context menu and keyboard shortcut)
+async function processTextCorrection(selectedText, tabId) {
+  console.log('Processing text correction...');
+  console.log('Tab ID:', tabId);
+  
+  try {
+    // Get API key from storage
+    const { geminiApiKey } = await chrome.storage.local.get('geminiApiKey');
+    
+    if (!geminiApiKey) {
+      console.error('No API key found');
+      alert('Please configure your Gemini API key in the extension options.');
+      chrome.runtime.openOptionsPage();
+      return;
+    }
+    
+    console.log('API key found, length:', geminiApiKey.length);
+    
+    // Show loading indicator
+    try {
+      await chrome.tabs.sendMessage(tabId, { 
+        action: 'SHOW_LOADING' 
+      });
+      console.log('Loading indicator sent');
+    } catch (msgError) {
+      console.warn('Could not send loading message:', msgError);
+    }
+    
+    // Call Gemini API
+    console.log('Calling Gemini API...');
+    const correctedText = await callGeminiAPI(selectedText, geminiApiKey);
+    console.log('API call successful, corrected text:', correctedText);
+    
+    // Send corrected text to content script
+    const response = await chrome.tabs.sendMessage(tabId, {
+      action: 'REPLACE_SELECTION',
+      replacementText: correctedText
+    });
+    console.log('Replacement message sent, response:', response);
+    
+  } catch (error) {
+    console.error('Error processing text:', error);
+    console.error('Error stack:', error.stack);
+    
+    // Send error message to content script
+    try {
+      await chrome.tabs.sendMessage(tabId, {
+        action: 'SHOW_ERROR',
+        error: error.message
+      });
+    } catch (msgError) {
+      console.error('Could not send error message:', msgError);
+      alert('Error: ' + error.message);
+    }
+  }
+}
 
 // Call Gemini API to fix grammar and spelling
 async function callGeminiAPI(text, apiKey) {

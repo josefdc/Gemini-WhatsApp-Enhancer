@@ -22,17 +22,28 @@ document.addEventListener('selectionchange', () => {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log('Content script received message:', request.action);
   
-  if (request.action === 'REPLACE_SELECTION') {
+  if (request.action === 'GET_SELECTION') {
+    // Get the current selection
+    const selection = window.getSelection();
+    const selectedText = selection ? selection.toString().trim() : '';
+    
+    console.log('Returning selected text:', selectedText);
+    sendResponse({ selectedText: selectedText });
+    
+  } else if (request.action === 'REPLACE_SELECTION') {
     replaceSelectedText(request.replacementText);
     sendResponse({ success: true });
+    
   } else if (request.action === 'SHOW_LOADING') {
     showLoadingCursor();
     sendResponse({ success: true });
+    
   } else if (request.action === 'SHOW_ERROR') {
     hideLoadingCursor();
     showError(request.error);
     sendResponse({ success: true });
   }
+  
   return true; // Keep message channel open for async response
 });
 

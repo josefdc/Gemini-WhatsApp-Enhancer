@@ -22,12 +22,24 @@
 5. Click "Save Configuration"
 
 ### Step 4: Test It!
+
+#### Option A: Context Menu
 1. Open https://web.whatsapp.com
 2. Click on any chat
 3. Type: "i going to the cinma tomorow"
 4. Select the text
 5. Right-click → "Gemini: Fix Grammar"
 6. See it change to: "I am going to the cinema tomorrow"
+
+#### Option B: Keyboard Shortcut (Faster!) ⚡
+1. Open https://web.whatsapp.com
+2. Click on any chat
+3. Type: "i going to the cinma tomorow"
+4. Press **Ctrl+A** (select all)
+5. Press **Ctrl+Shift+G** (fix grammar)
+6. See it change instantly!
+
+> Mac users: Use `Command+Shift+G` instead
 
 ## ✅ Verification Checklist
 
