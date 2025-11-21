@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gemini Extension Test Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+    h1 {
+      color: #667eea;
+    }
+    .test-box {
+      border: 2px solid #667eea;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+    .editable {
+      border: 1px solid #ccc;
+      padding: 15px;
+      min-height: 100px;
+      margin: 10px 0;
+      background: white;
+      border-radius: 4px;
+    }
+    button {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    button:hover {
+      background: #5568d3;
+    }
+    .log {
+      background: #f5f5f5;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 12px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .success { color: green; }
+    .error { color: red; }
+    .info { color: blue; }
+  </style>
+</head>
+<body>
+  <h1>🧪 Gemini Extension Test Page</h1>
+  
+  <div class="test-box">
+    <h2>Test 1: Content Editable Selection</h2>
+    <p>Try selecting text below and using the context menu:</p>
+    <div class="editable" contenteditable="true">
+      i going to the cinma tomorow and i want too watch a movee
+    </div>
+    <p>✓ Select some text above</p>
+    <p>✓ Right-click → "Gemini: Fix Grammar"</p>
+  </div>
+
+  <div class="test-box">
+    <h2>Test 2: Extension Check</h2>
+    <button onclick="checkExtension()">Check Extension Status</button>
+    <button onclick="testAPIKey()">Test API Key</button>
+    <button onclick="clearLog()">Clear Log</button>
+    <div id="log" class="log"></div>
+  </div>
+
+  <script>
+    const log = document.getElementById('log');
+
+    function addLog(message, type = 'info') {
+      const time = new Date().toLocaleTimeString();
+      const entry = document.createElement('div');
+      entry.className = type;
+      entry.textContent = `[${time}] ${message}`;
+      log.appendChild(entry);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    function clearLog() {
+      log.innerHTML = '';
+    }
+
+    async function checkExtension() {
+      addLog('Checking extension status...', 'info');
+      
+      try {
+        // Check if chrome.runtime is available
+        if (typeof chrome !== 'undefined' && chrome.runtime) {
+          addLog('✓ Chrome runtime available', 'success');
+          addLog('Extension ID: ' + chrome.runtime.id, 'info');
+        } else {
+          addLog('✗ Chrome runtime NOT available', 'error');
+          return;
+        }
+
+        // Check for API key
+        chrome.storage.local.get('geminiApiKey', (result) => {
+          if (chrome.runtime.lastError) {
+            addLog('✗ Error accessing storage: ' + chrome.runtime.lastError.message, 'error');
+            return;
+          }
+          
+          if (result.geminiApiKey) {
+            addLog('✓ API key configured (length: ' + result.geminiApiKey.length + ')', 'success');
+            addLog('Key starts with: ' + result.geminiApiKey.substring(0, 10) + '...', 'info');
+          } else {
+            addLog('✗ No API key found', 'error');
+          }
+        });
+
+        // Test message passing
+        chrome.runtime.sendMessage({ action: 'PING' }, (response) => {
+          if (chrome.runtime.lastError) {
+            addLog('✗ Message passing failed: ' + chrome.runtime.lastError.message, 'error');
+          } else {
+            addLog('✓ Message passing works', 'success');
+          }
+        });
+
+      } catch (error) {
+        addLog('✗ Error: ' + error.message, 'error');
+      }
+    }
+
+    async function testAPIKey() {
+      addLog('Testing API key...', 'info');
+      
+      try {
+        const result = await new Promise((resolve) => {
+          chrome.storage.local.get('geminiApiKey', resolve);
+        });
+
+        if (!result.geminiApiKey) {
+          addLog('✗ No API key configured', 'error');
+          return;
+        }
+
+        addLog('Sending test request to background script...', 'info');
+        
+        const response = await new Promise((resolve) => {
+          chrome.runtime.sendMessage({
+            action: 'TEST_API_KEY',
+            apiKey: result.geminiApiKey
+          }, resolve);
+        });
+
+        if (response.success) {
+          addLog('✓ API key is VALID!', 'success');
+        } else {
+          addLog('✗ API test failed: ' + response.error, 'error');
+        }
+
+      } catch (error) {
+        addLog('✗ Error testing API: ' + error.message, 'error');
+      }
+    }
+
+    // Log when page loads
+    window.addEventListener('load', () => {
+      addLog('Test page loaded', 'info');
+      addLog('Select text in the editable box and right-click', 'info');
+    });
+
+    // Listen for messages from content script
+    window.addEventListener('message', (event) => {
+      if (event.data.type === 'GEMINI_LOG') {
+        addLog(event.data.message, event.data.level || 'info');
+      }
+    });
+  </script>
+</body>
+</html>
