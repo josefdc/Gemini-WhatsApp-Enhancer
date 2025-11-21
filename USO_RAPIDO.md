@@ -9,11 +9,11 @@ Ahora puedes corregir texto **mucho más rápido** con el teclado:
 ```
 1. Escribe tu mensaje en WhatsApp
 2. Ctrl+A          ← Selecciona todo el texto
-3. Ctrl+Shift+G    ← Corrige automáticamente
+3. Ctrl+Shift+F    ← Corrige automáticamente
 4. Enter           ← Envía el mensaje
 ```
 
-**En Mac:** Usa `Command+Shift+G` en lugar de `Ctrl+Shift+G`
+**En Mac:** Usa `Command+Shift+F` en lugar de `Ctrl+Shift+F`
 
 ---
 
@@ -24,7 +24,7 @@ Ahora puedes corregir texto **mucho más rápido** con el teclado:
 **Pasos:**
 1. Escribe tu mensaje: `i going to the cinma tomorow`
 2. Presiona **`Ctrl+A`** (selecciona todo)
-3. Presiona **`Ctrl+Shift+G`** (corrige)
+3. Presiona **`Ctrl+Shift+F`** (corrige)
 4. ¡Listo! El texto se corrige automáticamente
 
 **Ventajas:**
@@ -50,7 +50,7 @@ Ahora puedes corregir texto **mucho más rápido** con el teclado:
 
 ## 🎨 Personalizar el Atajo (Opcional)
 
-Si `Ctrl+Shift+G` no te gusta o está en conflicto:
+Si `Ctrl+Shift+F` no te gusta o está en conflicto:
 
 1. Ve a `chrome://extensions/shortcuts`
 2. Busca "Gemini WhatsApp Enhancer"
@@ -64,20 +64,20 @@ Si `Ctrl+Shift+G` no te gusta o está en conflicto:
 
 ### Para corregir TODO el mensaje
 ```
-Ctrl+A → Ctrl+Shift+G
+Ctrl+A → Ctrl+Shift+F
 ```
 
 ### Para corregir SOLO una parte
 ```
 1. Selecciona con el mouse la parte que quieres corregir
-2. Ctrl+Shift+G
+2. Ctrl+Shift+F
 ```
 
 ### Para correcciones rápidas seguidas
 ```
-Escribe → Ctrl+A → Ctrl+Shift+G → Enter
-Escribe → Ctrl+A → Ctrl+Shift+G → Enter
-Escribe → Ctrl+A → Ctrl+Shift+G → Enter
+Escribe → Ctrl+A → Ctrl+Shift+F → Enter
+Escribe → Ctrl+A → Ctrl+Shift+F → Enter
+Escribe → Ctrl+A → Ctrl+Shift+F → Enter
 ```
 
 ---
@@ -88,7 +88,7 @@ Escribe → Ctrl+A → Ctrl+Shift+G → Enter
 1. Click en un chat de WhatsApp
 2. Escribes: "hey how r u doing 2day? i was thinking we cud meet tomorow"
 3. Ctrl+A (selecciona todo)
-4. Ctrl+Shift+G (corrige)
+4. Ctrl+Shift+F (corrige)
 5. El texto cambia a: "Hey, how are you doing today? I was thinking we could meet tomorrow."
 6. Enter (envías)
 ```
@@ -106,7 +106,7 @@ Escribe → Ctrl+A → Ctrl+Shift+G → Enter
 - ✅ Verifica el atajo en `chrome://extensions/shortcuts`
 
 ### "No text selected"
-- Presiona `Ctrl+A` antes de `Ctrl+Shift+G`
+- Presiona `Ctrl+A` antes de `Ctrl+Shift+F`
 - O selecciona texto manualmente con el mouse
 
 ### El atajo está en conflicto
@@ -119,9 +119,9 @@ Escribe → Ctrl+A → Ctrl+Shift+G → Enter
 
 | Método | Atajo | Velocidad | Mejor Para |
 |--------|-------|-----------|------------|
-| **Teclado** | `Ctrl+Shift+G` | ⚡⚡⚡ Muy rápido | Uso diario, mensajes completos |
+| **Teclado** | `Ctrl+Shift+F` | ⚡⚡⚡ Muy rápido | Uso diario, mensajes completos |
 | **Click Derecho** | Menu contextual | ⚡ Normal | Corregir partes específicas |
 
 ---
 
-**Recomendación:** Usa el atajo de teclado `Ctrl+Shift+G` para máxima velocidad! 🚀
+**Recomendación:** Usa el atajo de teclado `Ctrl+Shift+F` para máxima velocidad! 🚀

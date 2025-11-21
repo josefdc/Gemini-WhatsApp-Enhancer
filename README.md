@@ -57,8 +57,8 @@ A Chrome Extension that integrates Google's Gemini API directly into WhatsApp We
 1. Open [WhatsApp Web](https://web.whatsapp.com)
 2. Type your message in the input box
 3. Press **`Ctrl+A`** to select all text (or select manually)
-4. Press **`Ctrl+Shift+G`** to fix grammar instantly
-5. Done! (Mac users: `Command+Shift+G`)
+4. Press **`Ctrl+Shift+F`** to fix grammar instantly
+5. Done! (Mac users: `Command+Shift+F`)
 
 > 💡 **Tip:** The keyboard shortcut is much faster for quick corrections!
 

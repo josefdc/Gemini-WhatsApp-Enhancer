@@ -40,8 +40,8 @@
   "commands": {
     "fix-grammar": {
       "suggested_key": {
-        "default": "Ctrl+Shift+G",
-        "mac": "Command+Shift+G"
+        "default": "Ctrl+Shift+F",
+        "mac": "Command+Shift+F"
       },
       "description": "Fix grammar of selected text"
     }
