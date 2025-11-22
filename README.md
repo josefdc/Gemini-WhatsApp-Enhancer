@@ -21,7 +21,7 @@ A Chrome Extension that integrates Google's Gemini API directly into WhatsApp We
 
 1. **Clone or download** this repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/josefdc/Gemini-WhatsApp-Enhancer
    cd "Gemini WhatsApp Enhancer"
    ```
 
