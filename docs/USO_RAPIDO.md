@@ -9,11 +9,11 @@ Ahora puedes corregir texto **mucho más rápido** con el teclado:
 ```
 1. Escribe tu mensaje en WhatsApp
 2. Ctrl+A          ← Selecciona todo el texto
-3. Ctrl+Shift+F    ← Corrige automáticamente
+3. Ctrl+Shift+X    ← Corrige automáticamente
 4. Enter           ← Envía el mensaje
 ```
 
-**En Mac:** Usa `Command+Shift+F` en lugar de `Ctrl+Shift+F`
+**En Mac:** Usa `Command+Shift+X` en lugar de `Ctrl+Shift+X`
 
 ---
 
@@ -24,7 +24,7 @@ Ahora puedes corregir texto **mucho más rápido** con el teclado:
 **Pasos:**
 1. Escribe tu mensaje: `i going to the cinma tomorow`
 2. Presiona **`Ctrl+A`** (selecciona todo)
-3. Presiona **`Ctrl+Shift+F`** (corrige)
+3. Presiona **`Ctrl+Shift+X`** (corrige)
 4. ¡Listo! El texto se corrige automáticamente
 
 **Ventajas:**
@@ -50,12 +50,12 @@ Ahora puedes corregir texto **mucho más rápido** con el teclado:
 
 ## 🎨 Personalizar el Atajo (Opcional)
 
-Si `Ctrl+Shift+F` no te gusta o está en conflicto:
+Si `Ctrl+Shift+X` no te gusta o está en conflicto:
 
 1. Ve a `chrome://extensions/shortcuts`
 2. Busca "Gemini WhatsApp Enhancer"
 3. Click en el campo del atajo
-4. Presiona la combinación que quieras (ej: `Ctrl+Shift+F`)
+4. Presiona la combinación que quieras (ej: `Ctrl+Shift+X`)
 5. ¡Listo!
 
 ---
@@ -64,20 +64,20 @@ Si `Ctrl+Shift+F` no te gusta o está en conflicto:
 
 ### Para corregir TODO el mensaje
 ```
-Ctrl+A → Ctrl+Shift+F
+Ctrl+A → Ctrl+Shift+X
 ```
 
 ### Para corregir SOLO una parte
 ```
 1. Selecciona con el mouse la parte que quieres corregir
-2. Ctrl+Shift+F
+2. Ctrl+Shift+X
 ```
 
 ### Para correcciones rápidas seguidas
 ```
-Escribe → Ctrl+A → Ctrl+Shift+F → Enter
-Escribe → Ctrl+A → Ctrl+Shift+F → Enter
-Escribe → Ctrl+A → Ctrl+Shift+F → Enter
+Escribe → Ctrl+A → Ctrl+Shift+X → Enter
+Escribe → Ctrl+A → Ctrl+Shift+X → Enter
+Escribe → Ctrl+A → Ctrl+Shift+X → Enter
 ```
 
 ---
@@ -88,7 +88,7 @@ Escribe → Ctrl+A → Ctrl+Shift+F → Enter
 1. Click en un chat de WhatsApp
 2. Escribes: "hey how r u doing 2day? i was thinking we cud meet tomorow"
 3. Ctrl+A (selecciona todo)
-4. Ctrl+Shift+F (corrige)
+4. Ctrl+Shift+X (corrige)
 5. El texto cambia a: "Hey, how are you doing today? I was thinking we could meet tomorrow."
 6. Enter (envías)
 ```
@@ -106,12 +106,12 @@ Escribe → Ctrl+A → Ctrl+Shift+F → Enter
 - ✅ Verifica el atajo en `chrome://extensions/shortcuts`
 
 ### "No text selected"
-- Presiona `Ctrl+A` antes de `Ctrl+Shift+F`
+- Presiona `Ctrl+A` antes de `Ctrl+Shift+X`
 - O selecciona texto manualmente con el mouse
 
 ### El atajo está en conflicto
 - Ve a `chrome://extensions/shortcuts`
-- Cambia el atajo por otro (ej: `Ctrl+Shift+F`)
+- Cambia el atajo por otro (ej: `Ctrl+Shift+X`)
 
 ---
 
@@ -119,9 +119,9 @@ Escribe → Ctrl+A → Ctrl+Shift+F → Enter
 
 | Método | Atajo | Velocidad | Mejor Para |
 |--------|-------|-----------|------------|
-| **Teclado** | `Ctrl+Shift+F` | ⚡⚡⚡ Muy rápido | Uso diario, mensajes completos |
+| **Teclado** | `Ctrl+Shift+X` | ⚡⚡⚡ Muy rápido | Uso diario, mensajes completos |
 | **Click Derecho** | Menu contextual | ⚡ Normal | Corregir partes específicas |
 
 ---
 
-**Recomendación:** Usa el atajo de teclado `Ctrl+Shift+F` para máxima velocidad! 🚀
+**Recomendación:** Usa el atajo de teclado `Ctrl+Shift+X` para máxima velocidad! 🚀

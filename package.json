@@ -1,0 +1,30 @@
+{
+  "name": "gemini-whatsapp-enhancer",
+  "version": "1.0.0",
+  "description": "Chrome Extension to enhance WhatsApp messages with Google Gemini API",
+  "private": true,
+  "scripts": {
+    "lint": "echo 'Linting JavaScript files...' && find src -name '*.js' -exec node -c {} \\;",
+    "validate": "npm run lint && echo 'Validating manifest.json...' && cat manifest.json | jq . > /dev/null && echo '✓ All files valid'",
+    "check": "npm run validate && echo '✓ Ready for deployment'",
+    "pack": "zip -r gemini-whatsapp-enhancer.zip . -x '*.git*' -x 'node_modules/*' -x '*.md' -x 'docs/*' -x '.vscode/*' -x '.editorconfig' && echo '✓ Extension packed'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/josefdc/Gemini-WhatsApp-Enhancer.git"
+  },
+  "keywords": [
+    "chrome-extension",
+    "whatsapp",
+    "gemini",
+    "ai",
+    "grammar",
+    "text-enhancement"
+  ],
+  "author": "josefdc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/josefdc/Gemini-WhatsApp-Enhancer/issues"
+  },
+  "homepage": "https://github.com/josefdc/Gemini-WhatsApp-Enhancer#readme"
+}

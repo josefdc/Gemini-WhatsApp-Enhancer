@@ -1,69 +1,166 @@
 # .gitignore for Chrome Extension
 
-# API Keys and sensitive data - NEVER COMMIT THESE!
+# ============================================================================
+# API Keys and Sensitive Data - NEVER COMMIT THESE!
+# ============================================================================
 *.key
 .env
-.env.local
-.env.production
+.env.*
+!.env.example
 secrets/
 config.local.js
 api-key.txt
-
-# Chrome Extension private keys (used for signing)
 *.pem
 
-# OS Files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-*~
-
-# Editor directories and files
-.vscode/
-.idea/
-*.swp
-*.swo
-*.swn
-.project
-.settings/
-*.sublime-project
-*.sublime-workspace
-
-# Logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Temporary files
-*.tmp
-*.bak
-*.cache
-
-# Packed extensions (may contain sensitive data)
+# ============================================================================
+# Chrome Extension Build Artifacts
+# ============================================================================
 *.zip
 *.crx
-
-# Node modules (if you add build tools later)
-node_modules/
-package-lock.json
-yarn.lock
-
-# Build outputs
 dist/
 build/
 .cache/
 
+# ============================================================================
+# Operating System Files
+# ============================================================================
+
 # macOS
+.DS_Store
+.DS_Store?
+._*
 .AppleDouble
 .LSOverride
+.Spotlight-V100
+.Trashes
+Icon
+.DocumentRevisions-V100
+.fseventsd
+.TemporaryItems
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
 
 # Windows
-desktop.ini
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
 
 # Linux
+*~
 .directory
+.Trash-*
+.nfs*
+
+# ============================================================================
+# IDEs and Editors
+# ============================================================================
+
+# Visual Studio Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+*.code-workspace
+
+# JetBrains IDEs (IntelliJ, WebStorm, etc.)
+.idea/
+*.iml
+*.ipr
+*.iws
+.idea_modules/
+out/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+.sublime-gulp.cache
+
+# Vim
+*.swp
+*.swo
+*.swn
+.*.sw[a-p]
+*~
+tags
+.vim/
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+
+# ============================================================================
+# Development Tools
+# ============================================================================
+
+# Node.js / npm
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+pnpm-debug.log*
+.pnpm-store/
+.npm
+.yarn/
+lerna-debug.log*
+
+# Logs
+*.log
+logs/
+*.log.*
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# ============================================================================
+# Temporary and Cache Files
+# ============================================================================
+*.tmp
+*.bak
+*.cache
+*.old
+*.orig
+.temp/
+temp/
+tmp/
+
+# ============================================================================
+# Testing and Coverage
+# ============================================================================
+coverage/
+.nyc_output/
+*.lcov
+.grunt
+lib-cov
+.mocha-history
+
+# ============================================================================
+# Documentation Build
+# ============================================================================
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# ============================================================================
+# Miscellaneous
+# ============================================================================
+.history/
+.eslintcache
+.stylelintcache

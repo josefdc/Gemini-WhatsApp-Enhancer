@@ -36,10 +36,10 @@
 2. Click on any chat
 3. Type: "i going to the cinma tomorow"
 4. Press **Ctrl+A** (select all)
-5. Press **Ctrl+Shift+F** (fix grammar)
+5. Press **Ctrl+Shift+X** (fix grammar)
 6. See it change instantly!
 
-> Mac users: Use `Command+Shift+F` instead
+> Mac users: Use `Command+Shift+X` instead
 
 ## ✅ Verification Checklist
 

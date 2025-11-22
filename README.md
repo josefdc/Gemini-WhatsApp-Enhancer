@@ -2,6 +2,10 @@
 
 A Chrome Extension that integrates Google's Gemini API directly into WhatsApp Web, allowing you to instantly improve your messages with AI-powered grammar fixing and text enhancement.
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-4285F4?logo=google-chrome&logoColor=white)](https://developer.chrome.com/docs/extensions/)
+[![Manifest V3](https://img.shields.io/badge/Manifest-V3-green)](https://developer.chrome.com/docs/extensions/mv3/intro/)
+
 ## ✨ Features
 
 - **Context Menu Integration**: Right-click selected text to fix grammar instantly
@@ -57,10 +61,33 @@ A Chrome Extension that integrates Google's Gemini API directly into WhatsApp We
 1. Open [WhatsApp Web](https://web.whatsapp.com)
 2. Type your message in the input box
 3. Press **`Ctrl+A`** to select all text (or select manually)
-4. Press **`Ctrl+Shift+F`** to fix grammar instantly
-5. Done! (Mac users: `Command+Shift+F`)
+4. Press **`Ctrl+Shift+X`** to fix grammar instantly
+5. Done! (Mac users: `Command+Shift+X`)
 
 > 💡 **Tip:** The keyboard shortcut is much faster for quick corrections!
+
+## 📁 Project Structure
+
+```
+Gemini-WhatsApp-Enhancer/
+├── src/                    # Source code
+│   ├── background.js       # Service worker for API calls
+│   ├── content.js          # Content script for DOM manipulation
+│   ├── options.html/js     # Options page for API key setup
+│   └── popup.html/js       # Extension popup
+├── icons/                  # Extension icons
+├── docs/                   # Documentation
+│   ├── testing/            # Test files and debugging tools
+│   ├── DesignDoc.md        # Technical design document
+│   ├── TROUBLESHOOTING.md  # Debug guide
+│   └── USO_RAPIDO.md       # Quick guide (Spanish)
+├── manifest.json           # Extension manifest (V3)
+├── README.md               # Main documentation
+├── SETUP.md                # Installation guide
+├── CONTRIBUTING.md         # Contribution guidelines
+├── CHANGELOG.md            # Version history
+└── LICENSE                 # MIT License
+```
 
 ## 🏗️ Architecture
 
@@ -99,19 +126,20 @@ User selects text → Right-click menu → Background worker calls Gemini API
 
 ```
 Gemini WhatsApp Enhancer/
-├── manifest.json          # Extension manifest (Manifest V3)
-├── background.js          # Service worker for API calls
-├── content.js             # Content script for WhatsApp Web
-├── options.html           # Options page HTML
-├── options.js             # Options page logic
-├── popup.html             # Popup HTML
-├── popup.js               # Popup logic
-├── icons/                 # Extension icons
+├── src/                    # Source code
+│   ├── background.js       # Service worker (API calls)
+│   ├── content.js          # Content script (DOM manipulation)
+│   ├── options.html/js     # Options page
+│   └── popup.html/js       # Extension popup
+├── icons/                  # Extension icons
 │   ├── icon16.png
 │   ├── icon48.png
 │   └── icon128.png
-├── DesingDoc.md          # Technical design document
-└── README.md             # This file
+├── docs/                   # Documentation
+├── manifest.json           # Extension manifest
+├── README.md               # This file
+├── SETUP.md               # Setup guide
+└── LICENSE                # MIT License
 ```
 
 ### API Configuration
@@ -160,6 +188,14 @@ The extension uses:
 
 This project is open source and available under the MIT License.
 
+## 🤝 Contributing
+
+Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+
+## 📋 Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for a list of changes and version history.
+
 ## 🙏 Acknowledgments
 
 - Built with [Google Gemini API](https://ai.google.dev/)
@@ -169,8 +205,8 @@ This project is open source and available under the MIT License.
 ## 📞 Support
 
 If you encounter any issues or have suggestions:
-1. Check the troubleshooting section above
-2. Review the [design document](DesingDoc.md) for technical details
+1. Check the [troubleshooting guide](docs/TROUBLESHOOTING.md)
+2. Review the [design document](docs/DesignDoc.md) for technical details
 3. Open an issue in the repository
 
 ---
