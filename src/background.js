@@ -1,6 +1,6 @@
 // Background Service Worker for Gemini WhatsApp Enhancer
 
-const GEMINI_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent';
+const GEMINI_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
 const CONTEXT_MENU_ID = 'gemini-fix-grammar';
 
 // Create context menu on installation
