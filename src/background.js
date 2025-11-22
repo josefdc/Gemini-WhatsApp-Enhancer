@@ -31,7 +31,7 @@ chrome.commands.onCommand.addListener(async (command) => {
     
     // Request the selected text from the content script
     try {
-      const response = await chrome.tabs.sendMessage(tab.id, {
+      const response = await sendMessageToTab(tab.id, {
         action: 'GET_SELECTION'
       });
       
@@ -40,7 +40,7 @@ chrome.commands.onCommand.addListener(async (command) => {
         await processTextCorrection(response.selectedText, tab.id);
       } else {
         console.log('No text selected');
-        chrome.tabs.sendMessage(tab.id, {
+        await sendMessageToTab(tab.id, {
           action: 'SHOW_ERROR',
           error: 'Please select text first (Ctrl+A or drag to select)'
         });
@@ -72,8 +72,13 @@ async function processTextCorrection(selectedText, tabId) {
     
     if (!geminiApiKey) {
       console.error('No API key found');
-      alert('Please configure your Gemini API key in the extension options.');
       chrome.runtime.openOptionsPage();
+      try {
+        await sendMessageToTab(tabId, {
+          action: 'SHOW_ERROR',
+          error: 'Please configure your Gemini API key in the extension options.'
+        });
+      } catch (e) { console.error('Failed to notify tab about missing key', e); }
       return;
     }
     
@@ -81,7 +86,7 @@ async function processTextCorrection(selectedText, tabId) {
     
     // Show loading indicator
     try {
-      await chrome.tabs.sendMessage(tabId, { 
+      await sendMessageToTab(tabId, { 
         action: 'SHOW_LOADING' 
       });
       console.log('Loading indicator sent');
@@ -95,7 +100,7 @@ async function processTextCorrection(selectedText, tabId) {
     console.log('API call successful, corrected text:', correctedText);
     
     // Send corrected text to content script
-    const response = await chrome.tabs.sendMessage(tabId, {
+    const response = await sendMessageToTab(tabId, {
       action: 'REPLACE_SELECTION',
       replacementText: correctedText
     });
@@ -107,13 +112,12 @@ async function processTextCorrection(selectedText, tabId) {
     
     // Send error message to content script
     try {
-      await chrome.tabs.sendMessage(tabId, {
+      await sendMessageToTab(tabId, {
         action: 'SHOW_ERROR',
         error: error.message
       });
     } catch (msgError) {
       console.error('Could not send error message:', msgError);
-      alert('Error: ' + error.message);
     }
   }
 }
@@ -181,6 +185,33 @@ async function callGeminiAPI(text, apiKey) {
     return correctedText.trim();
   } catch (error) {
     console.error('Fetch error:', error);
+    throw error;
+  }
+}
+
+// Helper function to ensure content script is loaded before sending message
+async function sendMessageToTab(tabId, message) {
+  try {
+    return await chrome.tabs.sendMessage(tabId, message);
+  } catch (error) {
+    // If content script is not ready, try to inject it
+    if (error.message.includes('Could not establish connection') || 
+        error.message.includes('Receiving end does not exist')) {
+      console.log('Content script not ready, injecting...');
+      try {
+        await chrome.scripting.executeScript({
+          target: { tabId: tabId },
+          files: ['src/content.js']
+        });
+        console.log('Content script injected, retrying message...');
+        // Give it a small moment to initialize listeners
+        await new Promise(resolve => setTimeout(resolve, 100));
+        return await chrome.tabs.sendMessage(tabId, message);
+      } catch (injectionError) {
+        console.error('Failed to inject content script:', injectionError);
+        throw error; // Throw original error if injection fails
+      }
+    }
     throw error;
   }
 }
