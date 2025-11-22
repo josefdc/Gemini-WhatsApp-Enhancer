@@ -10,7 +10,7 @@ chrome.runtime.onInstalled.addListener(() => {
     title: 'Gemini: Fix Grammar',
     contexts: ['selection']
   });
-  
+
   console.log('Gemini WhatsApp Enhancer installed successfully');
 });
 
@@ -18,23 +18,23 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.commands.onCommand.addListener(async (command) => {
   if (command === 'fix-grammar') {
     console.log('=== KEYBOARD SHORTCUT TRIGGERED ===');
-    
+
     // Get the active tab
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    
+
     if (!tab || !tab.url?.includes('web.whatsapp.com')) {
       console.log('Not on WhatsApp Web, ignoring command');
       return;
     }
-    
+
     console.log('On WhatsApp, requesting selected text from tab:', tab.id);
-    
+
     // Request the selected text from the content script
     try {
       const response = await sendMessageToTab(tab.id, {
         action: 'GET_SELECTION'
       });
-      
+
       if (response && response.selectedText) {
         console.log('Received selected text:', response.selectedText);
         await processTextCorrection(response.selectedText, tab.id);
@@ -65,11 +65,11 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 async function processTextCorrection(selectedText, tabId) {
   console.log('Processing text correction...');
   console.log('Tab ID:', tabId);
-  
+
   try {
     // Get API key from storage
     const { geminiApiKey } = await chrome.storage.local.get('geminiApiKey');
-    
+
     if (!geminiApiKey) {
       console.error('No API key found');
       chrome.runtime.openOptionsPage();
@@ -81,35 +81,35 @@ async function processTextCorrection(selectedText, tabId) {
       } catch (e) { console.error('Failed to notify tab about missing key', e); }
       return;
     }
-    
+
     console.log('API key found, length:', geminiApiKey.length);
-    
+
     // Show loading indicator
     try {
-      await sendMessageToTab(tabId, { 
-        action: 'SHOW_LOADING' 
+      await sendMessageToTab(tabId, {
+        action: 'SHOW_LOADING'
       });
       console.log('Loading indicator sent');
     } catch (msgError) {
       console.warn('Could not send loading message:', msgError);
     }
-    
+
     // Call Gemini API
     console.log('Calling Gemini API...');
     const correctedText = await callGeminiAPI(selectedText, geminiApiKey);
     console.log('API call successful, corrected text:', correctedText);
-    
+
     // Send corrected text to content script
     const response = await sendMessageToTab(tabId, {
       action: 'REPLACE_SELECTION',
       replacementText: correctedText
     });
     console.log('Replacement message sent, response:', response);
-    
+
   } catch (error) {
     console.error('Error processing text:', error);
     console.error('Error stack:', error.stack);
-    
+
     // Send error message to content script
     try {
       await sendMessageToTab(tabId, {
@@ -125,7 +125,7 @@ async function processTextCorrection(selectedText, tabId) {
 // Call Gemini API to fix grammar and spelling
 async function callGeminiAPI(text, apiKey) {
   const url = `${GEMINI_API_ENDPOINT}?key=${apiKey}`;
-  
+
   const requestBody = {
     system_instruction: {
       parts: [{
@@ -138,10 +138,10 @@ async function callGeminiAPI(text, apiKey) {
       }]
     }]
   };
-  
+
   console.log('Calling Gemini API with endpoint:', GEMINI_API_ENDPOINT);
   console.log('Request body:', JSON.stringify(requestBody, null, 2));
-  
+
   try {
     const response = await fetch(url, {
       method: 'POST',
@@ -150,13 +150,13 @@ async function callGeminiAPI(text, apiKey) {
       },
       body: JSON.stringify(requestBody)
     });
-    
+
     console.log('API Response status:', response.status, response.statusText);
-    
+
     if (!response.ok) {
       const errorText = await response.text();
       console.error('API Error response:', errorText);
-      
+
       let errorMessage;
       try {
         const errorData = JSON.parse(errorText);
@@ -164,24 +164,24 @@ async function callGeminiAPI(text, apiKey) {
       } catch (e) {
         errorMessage = response.statusText;
       }
-      
+
       throw new Error(`API Error (${response.status}): ${errorMessage}`);
     }
-    
+
     const data = await response.json();
     console.log('API Response data:', JSON.stringify(data, null, 2));
-    
+
     // Extract the corrected text from the response
     const correctedText = data.candidates?.[0]?.content?.parts?.[0]?.text;
-    
+
     if (!correctedText) {
       console.error('No text in response. Full response:', data);
       throw new Error('No text returned from API. Check console for details.');
     }
-    
+
     console.log('Original:', text);
     console.log('Corrected:', correctedText);
-    
+
     return correctedText.trim();
   } catch (error) {
     console.error('Fetch error:', error);
@@ -195,7 +195,7 @@ async function sendMessageToTab(tabId, message) {
     return await chrome.tabs.sendMessage(tabId, message);
   } catch (error) {
     // If content script is not ready, try to inject it
-    if (error.message.includes('Could not establish connection') || 
+    if (error.message.includes('Could not establish connection') ||
         error.message.includes('Receiving end does not exist')) {
       console.log('Content script not ready, injecting...');
       try {
