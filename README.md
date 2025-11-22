@@ -24,18 +24,21 @@ A Chrome Extension that integrates Google's Gemini API directly into WhatsApp We
 ### Steps
 
 1. **Clone or download** this repository:
+
    ```bash
    git clone https://github.com/josefdc/Gemini-WhatsApp-Enhancer
    cd "Gemini WhatsApp Enhancer"
    ```
 
 2. **Create placeholder icons** (or add your own):
+
    ```bash
    mkdir -p icons
    # Add icon16.png, icon48.png, and icon128.png to the icons/ folder
    ```
 
 3. **Load the extension** in Chrome:
+
    - Open Chrome and navigate to `chrome://extensions/`
    - Enable "Developer mode" (toggle in top-right corner)
    - Click "Load unpacked"
@@ -51,6 +54,7 @@ A Chrome Extension that integrates Google's Gemini API directly into WhatsApp We
 ## 📖 How to Use
 
 ### Method 1: Context Menu (Right-click)
+
 1. Open [WhatsApp Web](https://web.whatsapp.com)
 2. Start typing a message (e.g., "i going to the cinma tomorow")
 3. Select the text you want to improve
@@ -58,6 +62,7 @@ A Chrome Extension that integrates Google's Gemini API directly into WhatsApp We
 5. Watch as your text is instantly corrected! ✨
 
 ### Method 2: Keyboard Shortcut (Faster!) ⚡
+
 1. Open [WhatsApp Web](https://web.whatsapp.com)
 2. Type your message in the input box
 3. Press **`Ctrl+A`** to select all text (or select manually)
@@ -93,13 +98,13 @@ Gemini-WhatsApp-Enhancer/
 
 ### Components
 
-| File | Purpose |
-|------|---------|
-| `manifest.json` | Extension configuration and permissions |
-| `background.js` | Service worker that handles API calls and context menu |
-| `content.js` | Injected into WhatsApp Web to handle DOM manipulation |
-| `options.html/js` | Settings page for API key configuration |
-| `popup.html/js` | Extension popup with quick status and instructions |
+| File              | Purpose                                                |
+| ----------------- | ------------------------------------------------------ |
+| `manifest.json`   | Extension configuration and permissions                |
+| `background.js`   | Service worker that handles API calls and context menu |
+| `content.js`      | Injected into WhatsApp Web to handle DOM manipulation  |
+| `options.html/js` | Settings page for API key configuration                |
+| `popup.html/js`   | Extension popup with quick status and instructions     |
 
 ### How It Works
 
@@ -145,6 +150,7 @@ Gemini WhatsApp Enhancer/
 ### API Configuration
 
 The extension uses:
+
 - **Model**: `gemini-2.0-flash-exp` (optimized for speed)
 - **System Instruction**: Ensures output is clean corrected text only
 - **Prompt**: "Fix grammar and spelling for the following text (keep same language)"
@@ -152,7 +158,7 @@ The extension uses:
 ### Testing
 
 1. **Basic Test**: Select text → Right-click → Verify replacement works
-2. **WhatsApp Specific**: 
+2. **WhatsApp Specific**:
    - Verify Send button activates after replacement
    - Test Ctrl+Z undo functionality
 3. **Edge Cases**:
@@ -164,14 +170,17 @@ The extension uses:
 ## 🐛 Troubleshooting
 
 ### Send Button Doesn't Activate
+
 - Make sure you're using the latest version of the extension
 - The extension uses `execCommand('insertText')` specifically to trigger WhatsApp's input events
 
 ### API Key Invalid
+
 - Verify your API key at [Google AI Studio](https://aistudio.google.com/app/apikey)
 - Use the "Test API Key" button in the options page
 
 ### Extension Not Working on WhatsApp
+
 - Refresh WhatsApp Web after installing the extension
 - Check that the extension has permission for `https://web.whatsapp.com/*`
 
@@ -205,6 +214,7 @@ See [CHANGELOG.md](CHANGELOG.md) for a list of changes and version history.
 ## 📞 Support
 
 If you encounter any issues or have suggestions:
+
 1. Check the [troubleshooting guide](docs/TROUBLESHOOTING.md)
 2. Review the [design document](docs/DesignDoc.md) for technical details
 3. Open an issue in the repository

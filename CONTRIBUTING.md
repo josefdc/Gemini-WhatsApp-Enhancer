@@ -39,6 +39,7 @@ Gemini-WhatsApp-Enhancer/
 ### 1. Making Changes
 
 - **Code Style:**
+
   - Use 2 spaces for indentation
   - Add comments for complex logic
   - Use descriptive variable names
@@ -58,11 +59,13 @@ Gemini-WhatsApp-Enhancer/
 Before submitting:
 
 1. **Load the extension:**
+
    ```bash
    chrome://extensions/ → Load unpacked → Select folder
    ```
 
 2. **Test on WhatsApp Web:**
+
    - Context menu works
    - Keyboard shortcut works (`Ctrl+Shift+X`)
    - Text replacement preserves Send button state
@@ -75,12 +78,14 @@ Before submitting:
 ### 3. Submitting Changes
 
 1. **Commit your changes:**
+
    ```bash
    git add .
    git commit -m "feat: your feature description"
    ```
 
 2. **Push to your fork:**
+
    ```bash
    git push origin feature/your-feature-name
    ```
@@ -124,12 +129,14 @@ We welcome suggestions! Open an issue with:
 ## 🎯 Areas for Contribution
 
 - **New Features:**
+
   - Tone selection (Formal, Casual, Concise)
   - Multiple language support
   - Custom prompts
   - Statistics/usage tracking
 
 - **Improvements:**
+
   - Better error handling
   - Performance optimization
   - UI/UX enhancements
